@@ -3,6 +3,7 @@ package ru.sl1degod.test.service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.sl1degod.test.api.response.WaterCutLogResponse;
 import ru.sl1degod.test.entity.WaterCutLog;
 import ru.sl1degod.test.exception.WaterLogNotFound;
 import ru.sl1degod.test.repository.WaterLogRepository;
@@ -27,7 +28,7 @@ public class WaterLogService {
         return waterLogRepository.save(waterLog);
     }
 
-    public WaterCutLog updateWaterLog(Long id, WaterCutLog waterLog) {
+    public WaterCutLog updateWaterLog(Long id, WaterCutLogResponse waterLog) {
         LoggerFactory.getLogger(WaterLogService.class).info(waterLogRepository.findById(id).get().toString());
         return waterLogRepository.findById(id)
                 .map(waterCutLog -> {
@@ -38,7 +39,6 @@ public class WaterLogService {
                     return waterLogRepository.save(waterCutLog);
                 })
                 .orElseThrow(() -> new WaterLogNotFound("Water Log Not Found"));
-
     }
 
     public void deleteWaterLogById(Long id) {

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.sl1degod.test.api.response.WaterCutLogResponse;
 import ru.sl1degod.test.entity.WaterCutLog;
 import ru.sl1degod.test.service.WaterLogService;
 
@@ -32,9 +33,9 @@ public class WaterLogController {
         return ResponseEntity.status(HttpStatus.CREATED).body(waterLog);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<WaterCutLog> updateWaterLog(@PathVariable Long id, @RequestBody WaterCutLog waterCutLog) {
-        return ResponseEntity.ok(waterLogService.updateWaterLog(id, waterCutLog));
+    @PutMapping("/{id}")
+    public ResponseEntity<WaterCutLog> updateWaterLog(@PathVariable Long id, @RequestBody WaterCutLogResponse waterCutLogResponse) {
+        return ResponseEntity.ok(waterLogService.updateWaterLog(id, waterCutLogResponse));
     }
 
     @DeleteMapping("/{id}")
